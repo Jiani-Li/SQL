@@ -1,0 +1,1 @@
+# 3 types of window functions are usefull in the ranking query in SQL:rank() over, dense_rank() over, row_number() over
