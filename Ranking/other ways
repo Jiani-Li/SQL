@@ -1,0 +1,4 @@
+# No.1 of the ranking
+# group by->order by desc->limit 1
+# 1.Write an SQL query to report the name of the winning candidate (i.e., the candidate who got the largest number of votes).
+
