@@ -1,4 +1,36 @@
 # No.1 of the ranking
 # group by->order by desc->limit 1
-# 1.Write an SQL query to report the name of the winning candidate (i.e., the candidate who got the largest number of votes).
+# 1.Write an SQL query to report the name of the winning candidate (i.e., the candidate who got the largest number of votes).There are 3 ways to write the SQL:
+
+# Way 1:
+select c.name 
+from Vote v
+left join Candidate c on v.candidateId=c.id
+group by c.name
+having count(*)
+order by count(*) desc
+limit 1;
+
+# Way 2:
+select name
+from Candidate c
+inner join (
+             select candidateId
+             from  Vote
+             group by candidateId
+             having count(id)
+             order by count(id) desc 
+             limit 1) as Winner
+             on c.id=Winner.candidateId;
+             
+# Way 3:
+select name
+from (
+  select CandidateId as id
+  from Vote
+  group by CandidateId
+  order by count(id) desc
+  limit 1
+) as Winner join Candidate
+on Winner.id = Candidate.id
 
