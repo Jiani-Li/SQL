@@ -20,6 +20,9 @@ SELECT ROUND (
 
 # Write an SQL query to find the people who have the most friends and the most friends number.
 # The test cases are generated so that only one person has the most friends.
+# UNION: only keeps unique records
+# UNION ALL: keeps all records, including duplicates
+# SQL code:
 select id, sum(num) as num
 from
        (select requester_id as id, count(requester_id) as num
