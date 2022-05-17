@@ -8,3 +8,29 @@ limit 1;
 
 
 # Write an SQL query to find the overall acceptance rate of requests, which is the number of acceptance divided by the number of requests. Return the answer rounded to 2 decimals places.
+SELECT ROUND (
+              IFNULL(
+                     (SELECT COUNT(DISTINCT requester_id,accepter_id) FROM RequestAccepted)
+                      /
+                     (SELECT COUNT(DISTINCT sender_id,send_to_id) FROM FriendRequest)
+                     ,0)
+             ,2) AS accept_rate
+
+
+
+# Write an SQL query to find the people who have the most friends and the most friends number.
+# The test cases are generated so that only one person has the most friends.
+select id, sum(num) as num
+from
+       (select requester_id as id, count(requester_id) as num
+       from RequestAccepted
+       group by requester_id
+
+       union all
+
+       select accepter_id as id, count(accepter_id) as num
+        from RequestAccepted
+       group by accepter_id) as temp
+group by id
+order by num desc
+limit 1;
