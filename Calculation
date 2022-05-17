@@ -1,0 +1,10 @@
+# Write an SQL query to report the question that has the highest answer rate. If multiple questions have the same maximum answer rate, report the question with the smallest question_id.
+# SQL code:
+select question_id as survey_log
+from SurveyLog
+group by question_id
+order by sum(if(action= 'answer',1,0))/sum(if(action= 'show',1,0)) desc
+limit 1;
+
+
+# Write an SQL query to find the overall acceptance rate of requests, which is the number of acceptance divided by the number of requests. Return the answer rounded to 2 decimals places.
